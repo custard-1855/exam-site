@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">こんにちは、{{ user.username }} さん</h1>
+<div class="row">
+  <div class="col-md-6">
+    <h2>受験可能な試験</h2>
+    <ul class="list-group">
+      {% for test in tests %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ test.title }}
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'take_test' test.id %}">受験する</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h2>あなたの回答履歴</h2>
+    <ul class="list-group">
+      {% for r in responses %}
+      <li class="list-group-item">
+        <strong>{{ r.question.text }}</strong><br>
+        あなたの回答: {{ r.answer }}<br>
+        結果: <span class="badge {% if r.is_correct %}bg-success{% else %}bg-danger{% endif %}">
+          {{ r.is_correct|yesno:"正解,不正解" }}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

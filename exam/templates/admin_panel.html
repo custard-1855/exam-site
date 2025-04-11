@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">管理者パネル</h1>
+<a href="#" class="btn btn-success mb-3">新しい試験を作成</a>
+<table class="table table-striped">
+<tr><th>試験タイトル</th><th>作成日</th><th>操作</th></tr>
+{% for test in tests %}
+<tr>
+  <td>{{ test.title }}</td>
+  <td>{{ test.created_at }}</td>
+  <td><a href="#" class="btn btn-sm btn-outline-secondary">編集</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
